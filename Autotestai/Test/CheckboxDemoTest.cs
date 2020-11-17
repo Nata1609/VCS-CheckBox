@@ -42,18 +42,18 @@ namespace Autotestai.Test
 
         }
 
-        [TestCase("Uncheck All")]
-        [TestCase("Check All")]
+        [TestCase(false, "Check All", TestName = "IsCheckAllButtonAppear")]
+        [TestCase(true, "Uncheck All",   TestName = "IsUncheckAllButtonAppear")]
+        
 
-        public void MultipleCheckboxTest(string msg)
+        public void MultipleCheckboxTest(bool IfbuttonSelected, string buttonName)
         {
             CheckboxDemoPage page = new CheckboxDemoPage(webdriver: _driver);
 
             page.CheckIfClickOnThisCheckboxNotSelected();
             page.ClickOnAllMultipleCheckboxes();
-            page.CheckResultIfUncheckAllButtonsAppear(msg);
-            page.UnclickOnAllMultipleCheckboxes();
-            page.CheckResultIfCheckAllButtonAppear(msg);
+            page.CheckResultIfButtonsAppear(IfbuttonSelected, buttonName);
+                     
 
 
         }
