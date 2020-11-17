@@ -15,8 +15,9 @@ namespace Autotestai.Page
         private IWebElement firstCheckbox => _driver.FindElement(By.Id("isAgeSelected"));
         private IWebElement text => _driver.FindElement(By.Id("txtAge"));
         private IReadOnlyCollection<IWebElement> multipleCheckboxList => _driver.FindElements(By.CssSelector(".cb1-element"));
-        private string checkButton => _driver.FindElement(By.Id("check1")).GetAttribute("value");
-        private string checkButton2 => _driver.FindElement(By.Id("check1")).GetAttribute("value");
+                
+        private string ButtonUncheckAllValue => _driver.FindElement(By.Id("check1")).GetAttribute("value" );
+        private string ButtonCheckAllValue => _driver.FindElement(By.Id("check1")).GetAttribute("value");
 
 
         public CheckboxDemoPage(IWebDriver webdriver) => _driver = webdriver;
@@ -39,30 +40,28 @@ namespace Autotestai.Page
 
         public void ClickOnAllMultipleCheckboxes()
         {
+
             foreach (IWebElement element in multipleCheckboxList)
             {
                 element.Click();
 
             }
-        }
 
-        public void CheckResultIfUncheckAllButtonsAppear(string text)
+        }
+        public void CheckResultIfButtonsAppear(bool buttonSelected, string buttonValue)
         {
-            Assert.That(checkButton, Is.EqualTo(text));
+            if (!buttonSelected)
+            {
+                ClickOnAllMultipleCheckboxes();
+                Assert.That(ButtonCheckAllValue, Is.EqualTo(buttonValue));
+            }
+            else {
+
+                Assert.That(ButtonUncheckAllValue, Is.EqualTo(buttonValue));
+
+            }                       
+            
         }
-
-        public void UnclickOnAllMultipleCheckboxes() 
-        {
-            ClickOnAllMultipleCheckboxes();
-            ClickOnAllMultipleCheckboxes();
-        }
-
-        public void CheckResultIfCheckAllButtonAppear(string text)
-        {
-            Assert.That(checkButton2, Is.EqualTo(text));
-        }
-
-
 
 
     }
