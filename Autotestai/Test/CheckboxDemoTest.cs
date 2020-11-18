@@ -28,7 +28,7 @@ namespace Autotestai.Test
         [OneTimeTearDown]
         public static void TearDown()
         {
-            //_driver.Quit();
+            _driver.Quit();
 
         }
 
